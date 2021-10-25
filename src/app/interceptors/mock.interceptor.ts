@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from "@angular/common/http";
 import {Observable, of} from "rxjs";
-import {catchError} from "rxjs/operators";
+import {catchError, delay} from "rxjs/operators";
 import {getMockData} from "../utils/mock.util";
 
 @Injectable()
@@ -13,9 +13,9 @@ export class MockInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError(error => {
         return of(new HttpResponse({
-          body: {...mock},
+          body: mock,
           status: 200
-        })) as Observable<HttpResponse<any>>;
+        })).pipe(delay(2000)) as Observable<HttpResponse<any>>;
       })
     )
   }
