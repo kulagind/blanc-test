@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Client} from "../interfaces/client.interface";
+import {Client, ClientDetails} from "../interfaces/client.interface";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
@@ -16,14 +16,14 @@ export class HttpService {
   ) { }
 
   getClients$(): Observable<Client[]> {
-    return this.http.get(this.clientsUrl);
+    return this.http.get<Client[]>(this.clientsUrl);
   }
 
-  getClient$(id: number): Observable<Client> {
-    return this.http.get(`${this.clientsUrl}/${id}`);
+  getClient$(id: string): Observable<ClientDetails> {
+    return this.http.get<ClientDetails>(`${this.clientsUrl}/${id}`);
   }
 
-  setPhone$(clientId: number, phone: string): Observable<void> {
-    return this.http.post(`${this.apiUrl}/${clientId}/changephone`, { phone });
+  setPhone$(clientId: string, phone: string): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/${clientId}/changephone`, { phone });
   }
 }

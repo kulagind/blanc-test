@@ -1,1 +1,4 @@
-export type Type = 'incoming' | 'outgoing';
+export enum Types {
+  incoming = 'incoming',
+  outgoing = 'outgoing'
+}

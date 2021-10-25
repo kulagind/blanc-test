@@ -1,14 +1,17 @@
 import {Transaction} from "./transaction.interface";
 
 export interface Client {
-  id: number,
+  id: string,
   organisation: string,
   /*
   * TIN (Taxpayer Identification Number) = ИНН
   * */
   TIN: number,
   openingDate: number,
-  balance: number,
+  balance: number
+}
+
+export interface ClientDetails {
   phone: string,
   transactions: Transaction[]
 }

@@ -1,4 +1,4 @@
-import {Type} from "./type.interface";
+import {Types} from "./type.interface";
 
 export interface Transaction {
   paymentDate: number,
@@ -7,5 +7,5 @@ export interface Transaction {
   * */
   partner: string,
   total: number,
-  type: Type
+  type: Types
 }
