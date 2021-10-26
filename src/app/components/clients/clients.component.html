@@ -1,0 +1,11 @@
+<h1>Клиенты</h1>
+
+<ng-container *ngIf="(clients$ | async) as clients">
+  <app-table
+    [values]="clients"
+    [columns]="columns"
+    [dateColumns]="dateColumns"
+    [currencyColumns]="currencyColumns"
+    (onValueClick)="navigateToClient($event)">
+  </app-table>
+</ng-container>

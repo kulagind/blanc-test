@@ -1,0 +1,17 @@
+<h1>Клиент {{id}}</h1>
+
+<ng-container *ngIf="client$ | async as client">
+  <h3>Телефон: {{client.phone}}</h3>
+  <app-table
+    title="Транзакции"
+    [values]="client.transactions"
+    [columns]="columns"
+    [dateColumns]="dateColumns"
+    [currencyColumns]="currencyColumns"
+    dateFormat="dd.MM.YYYY">
+  </app-table>
+</ng-container>
+<div>
+  <p-button label="Назад" routerLink="/clients"></p-button>
+</div>
+

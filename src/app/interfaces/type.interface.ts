@@ -1,4 +1,4 @@
 export enum Types {
-  incoming = 'incoming',
-  outgoing = 'outgoing'
+  incoming = 'входящий',
+  outgoing = 'исходящий'
 }

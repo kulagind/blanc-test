@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -12,22 +12,36 @@ import {CustomRouteReuseStrategy} from "./classes/custom-route-reuse-strategy.cl
 import {TableModule} from "primeng/table";
 import {CustomIfDirective} from "./directives/custom-if.directive";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {ButtonModule} from "primeng/button";
+import {registerLocaleData} from "@angular/common";
+import localeRu from '@angular/common/locales/ru';
+import { CurrencyComponent } from './components/currency/currency.component';
+import { TableComponent } from './components/table/table.component';
+
+registerLocaleData(localeRu);
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientsComponent,
     ClientComponent,
-    CustomIfDirective
+    CustomIfDirective,
+    CurrencyComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     TableModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ButtonModule
   ],
   providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: "ru-RU"
+    },
     {
       provide: RouteReuseStrategy,
       useClass: CustomRouteReuseStrategy

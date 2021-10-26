@@ -23,4 +23,8 @@ export class ClientDetailsService {
       }
     })
   }
+
+  clear(): void {
+    this.client.next(null);
+  }
 }

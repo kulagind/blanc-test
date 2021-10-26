@@ -55,19 +55,19 @@ export const CLIENT_DETAILS: { [id: string]: ClientDetails } = {
       {
         paymentDate: Date.now(),
         partner: 'Partner 1',
-        total: 100000000,
+        total: 11111111,
         type: Types.incoming
       },
       {
         paymentDate: Date.now(),
         partner: 'Partner 2',
-        total: 200000000,
+        total: 222222222,
         type: Types.incoming
       },
       {
         paymentDate: Date.now(),
         partner: 'Partner 3',
-        total: 50,
+        total: 5000,
         type: Types.outgoing
       },
     ]
@@ -78,19 +78,19 @@ export const CLIENT_DETAILS: { [id: string]: ClientDetails } = {
       {
         paymentDate: Date.now(),
         partner: 'Partner 1',
-        total: 100000000,
+        total: 9090909090,
         type: Types.incoming
       },
       {
         paymentDate: Date.now(),
         partner: 'Partner 2',
-        total: 200000000,
+        total: 3042345685,
         type: Types.incoming
       },
       {
         paymentDate: Date.now(),
         partner: 'Partner 3',
-        total: 50,
+        total: 55550,
         type: Types.outgoing
       },
     ]
