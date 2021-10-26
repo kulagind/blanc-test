@@ -1,12 +1,13 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {map, takeUntil} from "rxjs/operators";
+import {distinctUntilChanged, map, takeUntil, tap} from "rxjs/operators";
 import {Destroy} from "../../services/destroy.service";
 import {Observable} from "rxjs";
 import {ClientDetails} from "../../interfaces/client.interface";
 import {ClientDetailsService} from "../../services/client-details.service";
 import {Transaction} from "../../interfaces/transaction.interface";
 import {Column} from "../../interfaces/column.interface";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-client',
@@ -34,23 +35,33 @@ export class ClientComponent implements OnInit {
       title: 'Дата платежа',
       key: 'paymentDate'
     },
-  ]
+  ];
   currencyColumns: Column<Transaction>[] = [
     {
       title: 'Сумма',
       key: 'total'
     },
-  ]
+  ];
+
+  phoneControl = new FormControl('');
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private destroy$: Destroy,
     private clientDetailsService: ClientDetailsService
   ) {
-    this.client$ = this.clientDetailsService.client$;
+    this.client$ = this.clientDetailsService.client$
+      .pipe(
+        tap(clientDetails => this.phoneControl.setValue(clientDetails?.phone, {emitEvent: false}))
+      );
   }
 
   ngOnInit(): void {
+    this.getClientDetails();
+    this.listenPhoneChanging();
+  }
+
+  private getClientDetails(): void {
     this.activatedRoute.paramMap
       .pipe(
         map(params => {
@@ -62,6 +73,17 @@ export class ClientComponent implements OnInit {
       )
       .subscribe(id => {
         this.clientDetailsService.getClientDetails(id);
+      });
+  }
+
+  private listenPhoneChanging(): void {
+    this.phoneControl.valueChanges
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(phone => {
+        this.clientDetailsService.setPhone(this.id, phone);
       });
   }
 }

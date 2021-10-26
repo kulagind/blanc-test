@@ -1,0 +1,9 @@
+<div>
+  <p-inputMask [ngClass]="{'hide-border': disabled}" [disabled]="disabled" [autoClear]="false" [(ngModel)]="value" mask="+ 9 (999) 999 99 99"></p-inputMask>
+  <p-button class="button" *ngIf="disabled; else editButtons" (onClick)="setDisabled(false)" label="Редактировать"></p-button>
+  <ng-template #editButtons>
+    <p-button class="button" (onClick)="save()" label="Сохранить"></p-button>
+    <p-button class="button" (onClick)="setDisabled(true)" label="Отменить"></p-button>
+  </ng-template>
+</div>
+

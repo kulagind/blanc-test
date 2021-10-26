@@ -15,8 +15,11 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {ButtonModule} from "primeng/button";
 import {registerLocaleData} from "@angular/common";
 import localeRu from '@angular/common/locales/ru';
-import { CurrencyComponent } from './components/currency/currency.component';
-import { TableComponent } from './components/table/table.component';
+import {CurrencyComponent} from './components/currency/currency.component';
+import {TableComponent} from './components/table/table.component';
+import {PhoneInputComponent} from './components/phone-input/phone-input.component';
+import {InputMaskModule} from "primeng/inputmask";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 registerLocaleData(localeRu);
 
@@ -27,7 +30,8 @@ registerLocaleData(localeRu);
     ClientComponent,
     CustomIfDirective,
     CurrencyComponent,
-    TableComponent
+    TableComponent,
+    PhoneInputComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,10 @@ registerLocaleData(localeRu);
     HttpClientModule,
     TableModule,
     ProgressSpinnerModule,
-    ButtonModule
+    ButtonModule,
+    InputMaskModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     {

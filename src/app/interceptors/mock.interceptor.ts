@@ -7,16 +7,22 @@ import {getMockData} from "../utils/mock.util";
 @Injectable()
 export class MockInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const matchId = req.url.match(/[1-9]*$/);
-    const clientId = matchId ? matchId[0] : '';
-    const mock = getMockData(clientId);
-    return next.handle(req).pipe(
-      catchError(error => {
-        return of(new HttpResponse({
-          body: mock,
-          status: 200
-        })).pipe(delay(2000)) as Observable<HttpResponse<any>>;
-      })
-    )
+    const param = req.url.split('/').pop() || '';
+    if (param === 'clients' || !isNaN(+param)) {
+      const matchId = param.match(/[1-9]*$/);
+      const clientId = matchId ? matchId[0] : '';
+      const mock = getMockData(clientId);
+      if (mock) {
+        return next.handle(req).pipe(
+          catchError(error => {
+            return of(new HttpResponse({
+              body: mock,
+              status: 200
+            })).pipe(delay(2000)) as Observable<HttpResponse<any>>;
+          })
+        )
+      }
+    }
+    return next.handle(req);
   }
 }

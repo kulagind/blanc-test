@@ -16,15 +16,24 @@ export class ClientDetailsService {
   }
 
   getClientDetails(id: string): void {
-    const subscription = this.httpService.getClient$(id).subscribe(client => {
-      this.client.next(client);
-      if (subscription) {
-        subscription.unsubscribe();
-      }
-    })
+    const subscription = this.httpService.getClient$(id)
+      .subscribe(client => {
+        this.client.next(client);
+        if (subscription) {
+          subscription.unsubscribe();
+        }
+      });
   }
 
   clear(): void {
     this.client.next(null);
+  }
+
+  setPhone(id: string, phone: string): void {
+    const subscription = this.httpService.setPhone$(id, phone).subscribe(() => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    });
   }
 }

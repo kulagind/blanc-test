@@ -28,9 +28,6 @@ export class CustomIfDirective<T> implements OnChanges {
     if (this.ngIf === null) {
       const factory = this.componentFactoryResolver.resolveComponentFactory(ProgressSpinner);
       this.viewContainerRef.createComponent(factory);
-    } else {
-      this.directive.ngIfThen = this.ngIfThen;
-      this.directive.ngIfElse = this.ngIfElse;
     }
   }
 }

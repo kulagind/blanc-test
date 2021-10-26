@@ -1,7 +1,8 @@
 <h1>Клиент {{id}}</h1>
 
 <ng-container *ngIf="client$ | async as client">
-  <h3>Телефон: {{client.phone}}</h3>
+  <h3>Телефон:</h3>
+  <app-phone-input [formControl]="phoneControl"></app-phone-input>
   <app-table
     title="Транзакции"
     [values]="client.transactions"
@@ -14,4 +15,3 @@
 <div>
   <p-button label="Назад" routerLink="/clients"></p-button>
 </div>
-
